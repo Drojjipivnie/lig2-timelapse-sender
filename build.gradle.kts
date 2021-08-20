@@ -23,8 +23,16 @@ dependencies {
     //DI
     implementation("io.quarkus:quarkus-arc")
 
-//    testImplementation("io.quarkus:quarkus-junit5")
-//    testImplementation("io.rest-assured:rest-assured")
+    //Quartz
+    implementation("io.quarkus:quarkus-quartz")
+    implementation("org.threeten:threeten-extra:1.7.0")
+
+    //PostgreSQL
+    implementation("io.quarkus:quarkus-jdbc-postgresql")
+    implementation("io.quarkus:quarkus-agroal")
+
+    //Telegram
+    implementation("org.telegram:telegrambots:5.3.0")
 }
 
 group = "io.drojj"
