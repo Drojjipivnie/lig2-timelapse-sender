@@ -11,8 +11,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession
 import org.threeten.extra.YearWeek
 import java.time.DayOfWeek
 import java.time.LocalDate
-import java.time.Month
-import java.time.Year
+import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.time.format.TextStyle
@@ -56,16 +55,13 @@ class VideoSenderBot(
                 LocalDate.parse(video.name).format(dayFormatter)
             }
             VideoType.WEEK -> {
-                val yearWeek = YearWeek.of(
-                    Year.now(),
-                    video.name.toInt()
-                )
+                val yearWeek = YearWeek.parse(video.name)
                 val startDay = yearWeek.atDay(DayOfWeek.MONDAY).format(dayFormatter)
                 val endDay = yearWeek.atDay(DayOfWeek.SUNDAY).format(dayFormatter)
                 "$startDay - $endDay"
             }
             VideoType.MONTH -> {
-                Month.valueOf(video.name).getDisplayName(TextStyle.FULL_STANDALONE, locale)
+                YearMonth.parse(video.name).month.getDisplayName(TextStyle.FULL_STANDALONE, locale)
                     .replaceFirstChar { it.titlecase(locale) }
             }
             else -> {
