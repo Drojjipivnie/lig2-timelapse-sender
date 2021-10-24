@@ -38,8 +38,8 @@ class VideoSenderBot(
 
     fun sendMessage(video: Video) {
         execute(SendVideo(chatId, InputFile(video.file)).apply {
-            width = 640
-            height = 360
+            width = 1280
+            height = 720
             supportsStreaming = true
             caption = """
             📌 #${video.type.hashTag}
