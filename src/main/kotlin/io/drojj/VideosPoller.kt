@@ -15,7 +15,7 @@ class VideosPoller {
     @Inject
     lateinit var bot: VideoSenderBot
 
-    @Scheduled(cron = "0/30 30-59 21 ? * * *", identity = "task-job")
+    @Scheduled(cron = "0/30 30-59 21 ? * * *", identity = "task-job", concurrentExecution = Scheduled.ConcurrentExecution.SKIP)
     fun poll() {
         LOGGER.info("Prepare to poll videos")
         val videos = videosDAO.notUploadedVideos()
