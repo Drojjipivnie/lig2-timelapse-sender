@@ -8,6 +8,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendVideo
 import org.telegram.telegrambots.meta.api.objects.InputFile
 import org.telegram.telegrambots.meta.api.objects.Update
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession
+import org.threeten.extra.YearQuarter
 import org.threeten.extra.YearWeek
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -65,7 +66,11 @@ class VideoSenderBot(
                     .replaceFirstChar { it.titlecase(locale) }
             }
             else -> {
-                video.name + " год"
+                val yearQuarter = YearQuarter.parse(video.name)
+
+                val startDay = yearQuarter.atDay(1).format(dayFormatter)
+                val endDay = yearQuarter.atDay(yearQuarter.lengthOfQuarter()).format(dayFormatter)
+                "$startDay - $endDay"
             }
         }
     }
